@@ -40,15 +40,32 @@ Example `mappings.js` file:
 export default function (o) {
   return {
     // reference
-    instanceOf: "MyData",
     id: o["DATA_ID"],
-    referenceID: "myplugin",
-    referenceVersion: "1.0.0",
+    reference: {
+      id: "myplugin",
+      version: "1.0.0",
+    },
     // db fields
-    myfieldone: o["CRYPTIC_FIELD_NAME,d,d"],
-    myfieldtwo: o["My factor"],
+    myFieldOne: o["MY_FACTOR"],
+    myFieldTwo: o["CRYPTIC_FIELD_NAME,d,d"],
+    // can be nested too ...
+    myFieldThree: {
+      myFieldFour: "MyFieldType", // static field values
+      myFieldFive: o["REF_FACTOR"]
+    },
+    // ... or use functions to modify data
+    myFieldSix: convertToMyFieldSix(o["component value 1"], o["component value 2"])
   };
+}
+
+// this can be anything from switch/case statements to calculations
+// it is recommended to convert data only as such
+// that original data can be rebuilt though
+function convertToMyFieldSix(val1, val2) {
+  switch (val1): {
+    // ...
+  }
 }
 ```
 
-You can look at the available plugins for further examples.
+You can look at the [available plugins](https://github.com/floralink/plugins) of Floralink on GitHub for further examples.
