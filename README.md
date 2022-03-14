@@ -6,34 +6,35 @@ Simple CLI tool for generating Floralink plugin databases from CSV files. The da
 
 Install @floralink/generator as a dev dependency in your plugin package:
 
-```
-npm install -D @floralink/generator
+```shell
+$ npm install -D @floralink/generator
 ```
 
 Use from your source data folder:
 
-```
-npx flgen -i mydatabase.csv
+```shell
+$ npx flgen -i mydatabase.csv
 ```
 
 ## Flags
 
 You can configure the generator with flags:
 
-```
-npx flgen -i mydatabase.csv -o db.json -m map.js -d ";"
+```shell
+$ npx flgen -i mydatabase.csv -o db.json -m map.js -d ";"
 ```
 
-| Flag          | Shorthand | Description                     | Default         |
-| ------------- | --------- | ------------------------------- | --------------- |
-| `--input`     | `-i`      | Input file (\*.csv)             | - (required)    |
-| `--output`    | `-o`      | Output file (\*.json)           | `database.json` |
-| `--mappings`  | `-m`      | Field mappings                  | `mappings.js`   |
-| `--delimiter` | `-d`      | Delimiter for cells in CSV file | `","`           |
+| Flag            | Shorthand | Description                               | Default         |
+| --------------- | --------- | ----------------------------------------- | --------------- |
+| `--input`       | `-i`      | Input file (\*.csv)                       | - (required)    |
+| `--output`      | `-o`      | Output file (\*.json)                     | `database.json` |
+| `--mappings`    | `-m`      | Field mappings                            | `mappings.js`   |
+| `--delimiter`   | `-d`      | Delimiter for cells in CSV file           | `","`           |
+| `--emptyvalues` | `-e`      | Comma seperated list of values to exclude | `NA,k. A.`      |
 
 ## Mappings
 
-Example `mappings.js` file:
+Example `mappings.js` file for returning the desired object structure from a CSV generated object:
 
 ```javascript
 // the argument passed by the generator is the parsed object from a CSV row
@@ -48,13 +49,13 @@ export default function (o) {
     // db fields
     myFieldOne: o["MY_FACTOR"],
     myFieldTwo: o["CRYPTIC_FIELD_NAME,d,d"],
-    // can be nested too ...
+    // can be nested too
     myFieldThree: {
       myFieldFour: "MyFieldType", // static field values
-      myFieldFive: o["REF_FACTOR"]
+      myFieldFive: o["REF_FACTOR"],
     },
-    // ... or use functions to modify data
-    myFieldSix: convertToMyFieldSix(o["component value 1"], o["component value 2"])
+    // use functions to modify data
+    myFieldSix: convertToMyFieldSix(o["component value 1"], o["component value 2"]),
   };
 }
 
@@ -68,4 +69,7 @@ function convertToMyFieldSix(val1, val2) {
 }
 ```
 
-You can look at the [available plugins](https://github.com/floralink/plugins) of Floralink on GitHub for further examples.
+You can specify if the data entry passed in the argument should be ommited in the resulting database by returning `undefined` in your function.
+After the mapping of all entries, Generator checks all values of an entry against a list of values that mean that there is no data (see `--emptyvalues` flag). Fields with an empty string are always ommited.
+
+Look at the [available plugins](https://github.com/floralink/plugins) of Floralink on GitHub for further examples.
