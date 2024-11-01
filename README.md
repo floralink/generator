@@ -1,8 +1,8 @@
 # @floralink/generator
 
-Simple CLI tool for generating Floralink plugin databases from CSV files. The data is mapped to per-taxon objects with the help of a `mappings.js` configuration file. More generally Generator can map CSV tables to JSON files given a mapping structure. It's possible to build nested object structures from two-dimensional tables.
+Simple CLI tool for generating Floralink plugin databases from CSV files. The data is mapped to per-taxon objects with the help of a `mapping.js` configuration file. More generally Generator can map CSV tables to JSON files given a mapping structure. It's possible to build nested object structures from two-dimensional tables.
 
-# Usage
+## Usage
 
 Install @floralink/generator as a dev dependency in your plugin package:
 
@@ -13,7 +13,7 @@ $ npm install -D @floralink/generator
 Use from your source data folder:
 
 ```shell
-$ npx flgen -i mydatabase.csv
+npx flgen -i mydatabase.csv
 ```
 
 ## Flags
@@ -21,20 +21,20 @@ $ npx flgen -i mydatabase.csv
 You can configure the generator with flags:
 
 ```shell
-$ npx flgen -i mydatabase.csv -o db.json -m map.js -d ";"
+npx flgen -i mydatabase.csv -o db.json -m map.js -d ";"
 ```
 
 | Flag            | Shorthand | Description                               | Default         |
 | --------------- | --------- | ----------------------------------------- | --------------- |
 | `--input`       | `-i`      | Input file (\*.csv)                       | - (required)    |
 | `--output`      | `-o`      | Output file (\*.json)                     | `database.json` |
-| `--mappings`    | `-m`      | Field mappings                            | `mappings.js`   |
+| `--mapping`     | `-m`      | Field mapping                             | `mapping.js`    |
 | `--delimiter`   | `-d`      | Delimiter for cells in CSV file           | `","`           |
-| `--emptyvalues` | `-e`      | Comma seperated list of values to exclude | `NA,k. A.`      |
+| `--emptyvalues` | `-e`      | Comma seperated list of values to exclude | (undefined)     |
 
-## Mappings
+## Mapping
 
-Example `mappings.js` file for returning the desired object structure from a CSV generated object:
+Example `mapping.js` file for returning the desired object structure from a CSV generated object:
 
 ```javascript
 // the argument passed by the generator is the parsed object from a CSV row
