@@ -7,7 +7,7 @@ Simple CLI tool for generating Floralink plugin databases from CSV files. The da
 Install @floralink/generator as a dev dependency in your plugin package:
 
 ```shell
-$ npm install -D @floralink/generator
+npm install -D @floralink/generator
 ```
 
 Use from your source data folder:
