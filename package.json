@@ -6,10 +6,6 @@
   "type": "module",
   "author": "Vincent Ruge",
   "license": "MIT",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --fix"
-  },
   "bin": {
     "flgen": "./bin/gen.js"
   },
