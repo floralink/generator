@@ -8,6 +8,7 @@ import {
   mapToEntriesObject,
   writeObjectToJSON,
 } from "../lib/index.js";
+import consola from "consola";
 
 /**
  * Handling command line arguments
@@ -23,11 +24,13 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions);
 
 if (!options.input) {
-  log("Input file must be specified with --input or -i flag", "ERROR");
+  consola.error(
+    new Error("An input file must be specified via --input or the -i flag.")
+  );
   exit();
 }
 
-log("Starting reading file and generating database...", "PROCESS");
+consola.start("Parsing and mapping CSV data...");
 
 // raw arguments and defaults
 const destinationPathArg = options.output || "./database.json";
@@ -61,36 +64,12 @@ if (options.emptyvalues) emptyValues = options.emptyvalues.split(",");
     emptyValues
   );
   writeObjectToJSON(destinationPath, taxonDataObject);
-  log(
+  consola.success(
     `Database with ${
       Object.values(taxonDataObject).length
-    } entries generated and saved to ${destinationPathArg}`,
-    "SUCCESS"
+    } entries generated and saved to ${destinationPathArg}`
   );
   const omitted = taxonDataArray.length - Object.values(taxonDataObject).length;
   if (omitted > 0)
-    log(`${omitted} entries have been omitted due to empty values`, "WARNING");
+    consola.warn(`${omitted} entries have been omitted due to empty values`);
 })();
-
-function log(msg, type = "INFO") {
-  let colorCode = 37; // defaults to white if type unknown
-  switch (type.toLowerCase()) {
-    case "info":
-      colorCode = "90";
-      break;
-    case "process":
-      colorCode = "35";
-      break;
-    case "success":
-      colorCode = "32";
-      break;
-    case "warning":
-      colorCode = "33";
-      break;
-    case "error":
-      colorCode = "31";
-      break;
-  }
-
-  console.log(`\x1b[${colorCode}m%s\x1b[0m`, `${type}: ${msg}`);
-}
