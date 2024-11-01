@@ -10,7 +10,7 @@
     "flgen": "./bin/gen.js"
   },
   "dependencies": {
-    "command-line-args": "^5.2.1",
+    "citty": "^0.1.6",
     "consola": "^3.2.3"
   }
 }

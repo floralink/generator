@@ -31,6 +31,7 @@ npx flgen -i mydatabase.csv -o db.json -m map.js -d ";"
 | `--mapping`     | `-m`      | Field mapping                             | `mapping.js`    |
 | `--delimiter`   | `-d`      | Delimiter for cells in CSV file           | `","`           |
 | `--emptyvalues` | `-e`      | Comma seperated list of values to exclude | (undefined)     |
+| `--help`        | `-h`      | Print help                                |                 |
 
 ## Mapping
 
