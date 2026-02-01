@@ -79,7 +79,7 @@ const main = defineCommand({
     const taxonDataObject = mapToEntriesObject(
       taxonDataArray,
       mappingFunction,
-      emptyvalues ? emptyvalues.split(",") : []
+      emptyvalues ? emptyvalues.split(",") : [],
     );
 
     // Write to JSON file
@@ -89,7 +89,7 @@ const main = defineCommand({
     consola.success(
       `Database with ${
         Object.values(taxonDataObject).length
-      } entries generated and saved to ${output}`
+      } entries generated and saved to ${output}`,
     );
 
     // Warn if entries were omitted
