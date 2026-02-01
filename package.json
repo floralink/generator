@@ -13,8 +13,8 @@
     "deps": "npm-check-updates --interactive --format group"
   },
   "dependencies": {
-    "citty": "^0.1.6",
-    "consola": "^3.2.3"
+    "citty": "^0.2.0",
+    "consola": "^3.4.2"
   },
   "devDependencies": {
     "npm-check-updates": "^19.3.2"
