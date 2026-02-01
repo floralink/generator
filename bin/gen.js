@@ -18,7 +18,7 @@ function getAbsolutePath(relativePath) {
 const main = defineCommand({
   meta: {
     name: "flgen",
-    version: "1.2.0",
+    version: "1.3.0",
     description:
       "Simple command line tool for mapping CSV tables to JSON databases",
   },
