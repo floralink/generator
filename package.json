@@ -9,8 +9,14 @@
   "bin": {
     "flgen": "./bin/gen.js"
   },
+  "scripts": {
+    "deps": "npm-check-updates --interactive --format group"
+  },
   "dependencies": {
     "citty": "^0.1.6",
     "consola": "^3.2.3"
+  },
+  "devDependencies": {
+    "npm-check-updates": "^19.3.2"
   }
 }
